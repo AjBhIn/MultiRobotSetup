@@ -333,7 +333,7 @@
       <frame_id>enemy_bot/odom</frame_id>
       <child_frame_id>enemy_bot/base_footprint</child_frame_id>
       <odom_publisher_frequency>30</odom_publisher_frequency>
-      <tf_topic>/tf</tf_topic>
+      <tf_topic>/enemy_bot/tf</tf_topic>
     </plugin>
 
     <!-- Joint state publisher scoped to /enemy_bot/joint_states -->

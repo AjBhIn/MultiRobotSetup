@@ -5,7 +5,7 @@
   Configured for: /our_bot namespace, fixed wheel materials, and namespaced TF frames[cite: 18].
 -->
 <sdf version="1.8">
-  <model name="turtlebot3_waffle">
+  <model name="our_bot">
     <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
 
     <!-- Base link definitions remain un-prefixed to maintain internal SDF kinematic graph integrity[cite: 18] -->
@@ -419,7 +419,8 @@
       <frame_id>our_bot/odom</frame_id>
       <child_frame_id>our_bot/base_footprint</child_frame_id>
       <odom_publisher_frequency>30</odom_publisher_frequency>
-      <tf_topic>/tf</tf_topic>
+      <tf_topic>/our_bot/tf</tf_topic>
+      
     </plugin>
 
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">

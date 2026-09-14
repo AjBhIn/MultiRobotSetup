@@ -1,7 +1,5 @@
-# ==============================================================================
-# Parameter Bridge Configuration for /enemy_bot
-# Note: Duplicate global /tf bridge removed to prevent frame loop interference.
-# ==============================================================================
+# Parameter Bridge for /enemy_bot
+# Note: Global GZ /tf bridge removed to prevent frame corruption and model snapping.
 
 - ros_topic_name: "/enemy_bot/joint_states"
   gz_topic_name: "/enemy_bot/joint_states"
