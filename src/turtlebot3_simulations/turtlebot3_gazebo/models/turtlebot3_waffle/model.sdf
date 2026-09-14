@@ -1,13 +1,14 @@
 <?xml version="1.0" ?>
 <!--
-  Custom TurtleBot3 Waffle SDF Model
-  Configured for /our_bot namespace frames and Gazebo DiffDrive plugin.
+  Complete SDF Model Definition: model.sdf
+  Package: turtlebot3_gazebo / our_bot_sim
+  Configured for: /our_bot namespace, fixed wheel materials, and namespaced TF frames[cite: 18].
 -->
 <sdf version="1.8">
-  <model name="our_bot">
+  <model name="turtlebot3_waffle">
     <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
 
-    <!-- Keep base link names un-prefixed for internal joint graph consistency -->
+    <!-- Base link definitions remain un-prefixed to maintain internal SDF kinematic graph integrity[cite: 18] -->
     <link name="base_footprint"/>
 
     <link name="base_link">
@@ -109,7 +110,7 @@
         <pose>-0.064 0 0.121 0 0 0</pose>
         <update_rate>10</update_rate>
         <topic>scan</topic>
-        <!-- CRITICAL: Matches the frame published by robot_state_publisher -->
+        <!-- Maps laser scan header frame_id directly to the namespaced robot_state_publisher link[cite: 18] -->
         <gz_frame_id>our_bot/base_scan</gz_frame_id>
         <lidar>
           <scan>
@@ -120,7 +121,7 @@
               <max_angle>6.280000</max_angle>
             </horizontal>
           </scan>
-          <!-- min range 0.12 prevents laser from colliding with internal robot geometry -->
+          <!-- Minimum cutoff at 0.12m prevents laser rays from hitting internal chassis mesh[cite: 18] -->
           <range>
             <min>0.120000</min>
             <max>3.5</max>
@@ -147,8 +148,32 @@
       <collision name="wheel_left_collision">
         <pose>0.0 0.144 0.023 -1.57 0 0</pose>
         <geometry>
-          <cylinder><radius>0.033</radius><length>0.018</length></cylinder>
+          <cylinder>
+            <radius>0.033</radius>
+            <length>0.018</length>
+          </cylinder>
         </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100000.0</mu>
+              <mu2>100000.0</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
       </collision>
       <visual name="wheel_left_visual">
         <pose>0.0 0.144 0.023 0 0 0</pose>
@@ -158,6 +183,11 @@
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
+        <!-- Explicit dark grey ambient and diffuse properties to fix white render glitch[cite: 18] -->
+        <material>
+          <ambient>0.2 0.2 0.2 1.0</ambient>
+          <diffuse>0.2 0.2 0.2 1.0</diffuse>
+        </material>
       </visual>
     </link>
 
@@ -173,8 +203,32 @@
       <collision name="wheel_right_collision">
         <pose>0.0 -0.144 0.023 -1.57 0 0</pose>
         <geometry>
-          <cylinder><radius>0.033</radius><length>0.018</length></cylinder>
+          <cylinder>
+            <radius>0.033</radius>
+            <length>0.018</length>
+          </cylinder>
         </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100000.0</mu>
+              <mu2>100000.0</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
       </collision>
       <visual name="wheel_right_visual">
         <pose>0.0 -0.144 0.023 0 0 0</pose>
@@ -184,6 +238,11 @@
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
+        <!-- Explicit dark grey ambient and diffuse properties to fix white render glitch[cite: 18] -->
+        <material>
+          <ambient>0.2 0.2 0.2 1.0</ambient>
+          <diffuse>0.2 0.2 0.2 1.0</diffuse>
+        </material>
       </visual>
     </link>
 
@@ -197,7 +256,21 @@
         </inertia>
       </inertial>
       <collision name='collision'>
-        <geometry><sphere><radius>0.005000</radius></sphere></geometry>
+        <geometry>
+          <sphere><radius>0.005000</radius></sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
       </collision>
     </link>
 
@@ -211,7 +284,21 @@
         </inertia>
       </inertial>
       <collision name='collision'>
-        <geometry><sphere><radius>0.005000</radius></sphere></geometry>
+        <geometry>
+          <sphere><radius>0.005000</radius></sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
       </collision>
     </link>
 
@@ -226,6 +313,7 @@
         </inertia>
         <mass>0.035</mass>
       </inertial>
+
       <pose>0.069 -0.047 0.107 0 0 0</pose>
       <sensor name="camera" type="camera">
         <always_on>true</always_on>
@@ -236,8 +324,20 @@
         <camera name="intel_realsense_r200">
           <camera_info_topic>camera/camera_info</camera_info_topic>
           <horizontal_fov>1.02974</horizontal_fov>
-          <image><width>1920</width><height>1080</height><format>R8G8B8</format></image>
-          <clip><near>0.02</near><far>300</far></clip>
+          <image>
+            <width>1920</width>
+            <height>1080</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
         </camera>
       </sensor>
     </link>
@@ -252,14 +352,20 @@
       <parent>base_link</parent>
       <child>wheel_left_link</child>
       <pose>0.0 0.144 0.023 -1.57 0 0</pose>
-      <axis><xyz>0 0 1</xyz><limit><effort>20</effort></limit></axis>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit><effort>20</effort></limit>
+      </axis>
     </joint>
 
     <joint name="wheel_right_joint" type="revolute">
       <parent>base_link</parent>
       <child>wheel_right_link</child>
       <pose>0.0 -0.144 0.023 -1.57 0 0</pose>
-      <axis><xyz>0 0 1</xyz><limit><effort>20</effort></limit></axis>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit><effort>20</effort></limit>
+      </axis>
     </joint>
 
     <joint name='caster_back_right_joint' type='ball'>
@@ -276,27 +382,31 @@
       <parent>base_link</parent>
       <child>imu_link</child>
       <pose>-0.032 0 0.068 0 0 0</pose>
+      <axis><xyz>0 0 1</xyz></axis>
     </joint>
 
     <joint name="lidar_joint" type="fixed">
       <parent>base_link</parent>
       <child>base_scan</child>
       <pose>-0.064 0 0.121 0 0 0</pose>
+      <axis><xyz>0 0 1</xyz></axis>
     </joint>
 
     <joint name="camera_joint" type="fixed">
       <parent>base_link</parent>
       <child>camera_link</child>
       <pose>0.064 -0.065 0.094 0 0 0</pose>
+      <axis><xyz>0 0 1</xyz></axis>
     </joint>
 
     <joint name="camera_rgb_joint" type="fixed">
       <parent>camera_link</parent>
       <child>camera_rgb_frame</child>
       <pose>0.005 0.018 0.013 0 0 0</pose>
+      <axis><xyz>0 0 1</xyz></axis>
     </joint>
 
-    <!-- Gazebo Differential Drive Plugin configured with /our_bot namespace frames -->
+    <!-- Gazebo Ignition Differential Drive plugin with explicit namespaced topics & frames[cite: 18] -->
     <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
       <left_joint>wheel_left_joint</left_joint>
       <right_joint>wheel_right_joint</right_joint>
