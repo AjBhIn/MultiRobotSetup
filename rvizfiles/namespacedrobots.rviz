@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -115,6 +115,8 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        map:
+          Value: true
         our_bot/base_footprint:
           Value: true
         our_bot/base_link:
@@ -149,7 +151,29 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        map:
+          our_bot/odom:
+            our_bot/base_footprint:
+              our_bot/base_link:
+                our_bot/base_scan:
+                  {}
+                our_bot/camera_link:
+                  our_bot/camera_depth_frame:
+                    our_bot/camera_depth_optical_frame:
+                      {}
+                  our_bot/camera_rgb_frame:
+                    our_bot/camera_rgb_optical_frame:
+                      {}
+                our_bot/caster_back_left_link:
+                  {}
+                our_bot/caster_back_right_link:
+                  {}
+                our_bot/imu_link:
+                  {}
+                our_bot/wheel_left_link:
+                  {}
+                our_bot/wheel_right_link:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -281,11 +305,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 68.66041564941406
+      Scale: 119.26066589355469
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0
-      Y: 0
+      X: 1.8373949527740479
+      Y: 0.640785813331604
     Saved: ~
 Window Geometry:
   Displays:
