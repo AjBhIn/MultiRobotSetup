@@ -46,11 +46,11 @@ def generate_launch_description():
             name='amcl',
             output='screen',
             parameters=[amcl_yaml],
-            remappings=[
-                ('map', '/map'),
-                ('/initialpose', '/our_bot/initialpose'),
-                ('initialpose', '/our_bot/initialpose')
-            ]
+            # remappings=[
+            #     ('map', '/map'),
+            #     ('/initialpose', '/our_bot/initialpose'),
+            #     ('initialpose', '/our_bot/initialpose')
+            # ]
         ),
         Node(
             namespace=namespace,
@@ -59,7 +59,7 @@ def generate_launch_description():
             name='planner_server',
             output='screen',
             parameters=[planner_yaml],
-            remappings=[('map', '/map')]
+            # remappings=[('map', '/map')]
         ),
         Node(
             namespace=namespace,
@@ -84,10 +84,10 @@ def generate_launch_description():
             name='bt_navigator',
             output='screen',
             parameters=[bt_navigator_yaml, {'default_nav_to_pose_bt_xml': behavior_xml}],
-            remappings=[
-                ('/goal_pose', '/our_bot/goal_pose'),
-                ('goal_pose', '/our_bot/goal_pose')
-            ]
+            # remappings=[
+            #     ('/goal_pose', '/our_bot/goal_pose'),
+            #     ('goal_pose', '/our_bot/goal_pose')
+            # ]
         ),
 
         # 3. SINGLE UNIFIED LIFECYCLE MANAGER

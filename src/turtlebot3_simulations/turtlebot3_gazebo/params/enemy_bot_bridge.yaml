@@ -1,5 +1,10 @@
 # Parameter Bridge for /enemy_bot
 # Note: Global GZ /tf bridge removed to prevent frame corruption and model snapping.
+- ros_topic_name: "/tf"
+  gz_topic_name: "/enemy_bot/tf"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS
 
 - ros_topic_name: "/enemy_bot/joint_states"
   gz_topic_name: "/enemy_bot/joint_states"
@@ -20,7 +25,7 @@
   direction: ROS_TO_GZ
 
 - ros_topic_name: "/enemy_bot/scan"
-  gz_topic_name: "scan"
+  gz_topic_name: "/our_bot/scan"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
@@ -29,4 +34,12 @@
   gz_topic_name: "imu"
   ros_type_name: "sensor_msgs/msg/Imu"
   gz_type_name: "gz.msgs.IMU"
+  direction: GZ_TO_ROS
+
+
+
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
   direction: GZ_TO_ROS

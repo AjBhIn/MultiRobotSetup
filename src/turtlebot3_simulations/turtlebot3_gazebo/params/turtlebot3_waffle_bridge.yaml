@@ -1,5 +1,11 @@
 # Parameter Bridge for /our_bot
 # Note: Global GZ /tf bridge removed so ROS 2 robot_state_publisher controls TF trees cleanly.
+- ros_topic_name: "/tf"
+  gz_topic_name: "/our_bot/tf"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS
+
 
 - ros_topic_name: "/our_bot/joint_states"
   gz_topic_name: "/our_bot/joint_states"
@@ -29,4 +35,12 @@
   gz_topic_name: "imu"
   ros_type_name: "sensor_msgs/msg/Imu"
   gz_type_name: "gz.msgs.IMU"
+  direction: GZ_TO_ROS
+
+
+
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
   direction: GZ_TO_ROS

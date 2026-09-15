@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /Map1
         - /Map1/Update Topic1
+        - /LaserScan1
         - /GlobalMap1/Update Topic1
       Splitter Ratio: 0.5
     Tree Height: 707
@@ -96,7 +97,7 @@ Visualization Manager:
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic:
         Depth: 5

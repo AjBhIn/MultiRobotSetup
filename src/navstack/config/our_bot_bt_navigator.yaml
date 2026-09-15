@@ -9,7 +9,7 @@ our_bot/bt_navigator:
   ros__parameters:
     use_sim_time: true
     global_frame: map
-    robot_base_frame: our_bot/base_footprint # Prefixed robot footprint
+    robot_base_frame: our_bot/base_link # Prefixed robot footprint
     odom_topic: /our_bot/odom                # Namespaced odometry topic
     bt_loop_duration: 10
     default_server_timeout: 20
