@@ -10,9 +10,6 @@ Panels:
         - /GlobalMap1/Update Topic1
         - /LocalMap1/Topic1
         - /LocalMap1/Update Topic1
-        - /Our_bot_TF1/Status1
-        - /Enemey_LaserScan1/Topic1
-        - /Our_bot_RobotModel1/Status1
         - /Enemey_TF1/Frames1
         - /Enemey_Local_Map1/Topic1
         - /Enemey_Local_Map1/Update Topic1
@@ -90,7 +87,7 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz_default_plugins/LaserScan
-      Color: 255; 255; 255
+      Color: 0; 0; 255
       Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
@@ -118,7 +115,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 3
       Class: rviz_default_plugins/Path
-      Color: 25; 255; 0
+      Color: 0; 0; 255
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -261,6 +258,28 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
+          enemy_bot/odom:
+            enemy_bot/base_footprint:
+              enemy_bot/base_link:
+                enemy_bot/base_scan:
+                  {}
+                enemy_bot/camera_link:
+                  enemy_bot/camera_depth_frame:
+                    enemy_bot/camera_depth_optical_frame:
+                      {}
+                  enemy_bot/camera_rgb_frame:
+                    enemy_bot/camera_rgb_optical_frame:
+                      {}
+                enemy_bot/caster_back_left_link:
+                  {}
+                enemy_bot/caster_back_right_link:
+                  {}
+                enemy_bot/imu_link:
+                  {}
+                enemy_bot/wheel_left_link:
+                  {}
+                enemy_bot/wheel_right_link:
+                  {}
           our_bot/odom:
             our_bot/base_footprint:
               our_bot/base_link:
@@ -294,24 +313,24 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz_default_plugins/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: ""
+      Color: 255; 0; 0
+      Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 4096
+      Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: Enemey_LaserScan
-      Position Transformer: ""
+      Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 8
       Size (m): 0.009999999776482582
       Style: Points
       Topic:
         Depth: 5
-        Durability Policy: Transient Local
+        Durability Policy: Volatile
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
@@ -330,79 +349,20 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /our_bot/robot_description
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_scan:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_rgb_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_rgb_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        caster_back_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        caster_back_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        wheel_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
       Name: Our_bot_RobotModel
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
       Enabled: true
@@ -476,6 +436,28 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
+          enemy_bot/odom:
+            enemy_bot/base_footprint:
+              enemy_bot/base_link:
+                enemy_bot/base_scan:
+                  {}
+                enemy_bot/camera_link:
+                  enemy_bot/camera_depth_frame:
+                    enemy_bot/camera_depth_optical_frame:
+                      {}
+                  enemy_bot/camera_rgb_frame:
+                    enemy_bot/camera_rgb_optical_frame:
+                      {}
+                enemy_bot/caster_back_left_link:
+                  {}
+                enemy_bot/caster_back_right_link:
+                  {}
+                enemy_bot/imu_link:
+                  {}
+                enemy_bot/wheel_left_link:
+                  {}
+                enemy_bot/wheel_right_link:
+                  {}
           our_bot/odom:
             our_bot/base_footprint:
               our_bot/base_link:
@@ -504,7 +486,7 @@ Visualization Manager:
       Binary representation: false
       Binary threshold: 100
       Class: rviz_default_plugins/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: false
       Enabled: true
       Name: Enemey_Local_Map
@@ -514,14 +496,42 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: ""
+        Value: /enemy_bot/local_costmap/costmap
       Update Topic:
         Depth: 5
         Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: _updates
+        Value: /enemy_bot/local_costmap/costmap_updates
       Use Timestamp: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 3
+      Class: rviz_default_plugins/Path
+      Color: 255; 0; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Billboards
+      Line Width: 0.05000000074505806
+      Name: Enemy_Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /enemy_bot/plan
       Value: true
   Enabled: true
   Global Options:
@@ -568,7 +578,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.12499991804361343
+      Angle: -0.005000066943466663
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -578,11 +588,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 102.58155822753906
+      Scale: 114.89134216308594
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 3.45982027053833
-      Y: 0.9150104522705078
+      X: 1.8210536241531372
+      Y: 0.3054552972316742
     Saved: ~
 Window Geometry:
   Displays:

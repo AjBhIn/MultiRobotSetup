@@ -20,7 +20,8 @@ our_bot:
         use_sim_time: True
         resolution: 0.05
         track_unknown_space: true
-        footprint: '[ [0.15, 0.12], [0.15, -0.12], [-0.15, -0.12], [-0.15, 0.12] ]' # Matches global costmap footprint 
+        # footprint: '[ [0.15, 0.12], [0.15, -0.12], [-0.15, -0.12], [-0.15, 0.12] ]' # Matches global costmap footprint 
+        robot_radius: 0.20
         plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
         static_layer:
           plugin: "nav2_costmap_2d::StaticLayer"
@@ -42,6 +43,6 @@ our_bot:
             obstacle_min_range: 0.0
         inflation_layer:
           plugin: "nav2_costmap_2d::InflationLayer"
-          cost_scaling_factor: 3.0
-          inflation_radius: 0.55
+          cost_scaling_factor: 5.0
+          inflation_radius: 0.75
         always_send_full_costmap: True
