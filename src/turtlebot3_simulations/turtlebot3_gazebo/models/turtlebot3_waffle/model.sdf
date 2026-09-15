@@ -109,7 +109,7 @@
         <visualize>true</visualize>
         <pose>-0.064 0 0.121 0 0 0</pose>
         <update_rate>10</update_rate>
-        <topic>scan</topic>
+        <topic>/our_bot/scan</topic>
         <!-- Maps laser scan header frame_id directly to the namespaced robot_state_publisher link[cite: 18] -->
         <gz_frame_id>our_bot/base_scan</gz_frame_id>
         <lidar>
@@ -320,7 +320,7 @@
         <visualize>false</visualize>
         <update_rate>30</update_rate>
         <topic>camera/image_raw</topic>
-        <gz_frame_id>our_bot/camera_rgb_frame</gz_frame_id>
+        <gz_frame_id>/our_bot/camera_rgb_frame</gz_frame_id>
         <camera name="intel_realsense_r200">
           <camera_info_topic>camera/camera_info</camera_info_topic>
           <horizontal_fov>1.02974</horizontal_fov>

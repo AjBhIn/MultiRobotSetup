@@ -101,7 +101,7 @@
         <visualize>true</visualize>
         <pose>-0.064 0 0.121 0 0 0</pose>
         <update_rate>10</update_rate>
-        <topic>scan</topic>
+        <topic>/enemy_bot/scan</topic>
         <gz_frame_id>enemy_bot/base_scan</gz_frame_id>
         <lidar>
           <scan>

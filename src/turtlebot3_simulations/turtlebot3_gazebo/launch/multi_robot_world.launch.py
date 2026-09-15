@@ -6,6 +6,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
+from launch_ros.actions import Node
 from launch.actions import AppendEnvironmentVariable, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
@@ -48,10 +49,20 @@ def generate_launch_description():
         os.path.join(pkg_gazebo, 'models')
     )
 
+    # Add this node to your return LaunchDescription([]) array
+    global_clock = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='global_clock_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+
     return LaunchDescription([
         gzserver,
         gzclient,
         spawn_our_bot,
         spawn_enemy_bot,
-        set_env_vars
+        set_env_vars,
+        global_clock
     ])

@@ -25,21 +25,21 @@
   direction: ROS_TO_GZ
 
 - ros_topic_name: "/enemy_bot/scan"
-  gz_topic_name: "/our_bot/scan"
+  gz_topic_name: "/enemy_bot/scan"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
 
 - ros_topic_name: "/enemy_bot/imu"
-  gz_topic_name: "imu"
+  gz_topic_name: "/enemy_bot/imu"
   ros_type_name: "sensor_msgs/msg/Imu"
   gz_type_name: "gz.msgs.IMU"
   direction: GZ_TO_ROS
 
 
-
-- ros_topic_name: "/clock"
-  gz_topic_name: "/clock"
-  ros_type_name: "rosgraph_msgs/msg/Clock"
-  gz_type_name: "gz.msgs.Clock"
-  direction: GZ_TO_ROS
+# Need it for each robot, but when working with multi robot in file, NO!
+# - ros_topic_name: "/clock"
+#   gz_topic_name: "/clock"
+#   ros_type_name: "rosgraph_msgs/msg/Clock"
+#   gz_type_name: "gz.msgs.Clock"
+#   direction: GZ_TO_ROS
