@@ -1,13 +1,6 @@
-# ==============================================================================
-# Controller Server & Local Costmap Configuration
-# DIFFERENCE FROM STANDARD:
-# 1. Root nodes scoped under 'our_bot/controller_server' and 'our_bot/local_costmap'.
-# 2. enable_stamped_cmd_vel: false outputs unstamped Twist for ros_gz_bridge.
-# 3. global_frame set to 'our_bot/odom' & robot_base_frame set to 'our_bot/base_footprint'.
-# 4. Explicit sensor_frame 'our_bot/base_scan' in local obstacle layer.
-# ==============================================================================
 our_bot/controller_server:
   ros__parameters:
+    use_sim_time: true
     controller_frequency: 20.0
     enable_stamped_cmd_vel: true
     costmap_update_timeout: 0.30
@@ -16,26 +9,21 @@ our_bot/controller_server:
     min_theta_velocity_threshold: 0.001
     failure_tolerance: 0.3
     progress_checker_plugins: ["progress_checker"]
-    goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
+    goal_checker_plugins: ["general_goal_checker"]
     controller_plugins: ["FollowPath"]
     use_realtime_priority: false
 
-    # Progress checker parameters
     progress_checker:
       plugin: "nav2_controller::SimpleProgressChecker"
       required_movement_radius: 0.5
       movement_time_allowance: 10.0
-    # Goal checker parameters
-    #precise_goal_checker:
-    #  plugin: "nav2_controller::SimpleGoalChecker"
-    #  xy_goal_tolerance: 0.25
-    #  yaw_goal_tolerance: 0.25
-    #  stateful: True
+
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
       xy_goal_tolerance: 0.25
       yaw_goal_tolerance: 0.25
+
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 56
@@ -43,15 +31,15 @@ our_bot/controller_server:
       batch_size: 2000
       ax_max: 1.0
       ax_min: -1.0
-      ay_max: 1.0
-      ay_min: 0.0
+      ay_max: 0.0        # Set to 0.0 for DiffDrive
+      ay_min: 0.0        # Set to 0.0 for DiffDrive
       az_max: 1.0
       vx_std: 0.2
-      vy_std: 0.2
+      vy_std: 0.0        # Set to 0.0 for DiffDrive
       wz_std: 0.4
-      vx_max: 0.20
-      vx_min: -0.20
-      vy_max: 0.5
+      vx_max: 0.26       # Hardware limit for TurtleBot3 Waffle
+      vx_min: -0.26
+      vy_max: 0.0        # Set to 0.0 for DiffDrive
       wz_max: 1.5
       iteration_count: 1
       prune_distance: 1.7
@@ -108,7 +96,6 @@ our_bot/controller_server:
         threshold_to_consider: 0.5
         offset_from_furthest: 20
         use_path_orientations: false
-        
       PathFollowCritic:
         enabled: true
         cost_power: 1
@@ -123,14 +110,11 @@ our_bot/controller_server:
         threshold_to_consider: 0.5
         max_angle_to_furthest: 1.0
         mode: 0
-      # TwirlingCritic:
-      #   enabled: true
-      #   twirling_cost_power: 1
-      #   twirling_cost_weight: 10.0
 
 our_bot/local_costmap:
   local_costmap:
     ros__parameters:
+      use_sim_time: true
       update_frequency: 5.0
       publish_frequency: 2.0
       global_frame: our_bot/odom
@@ -139,18 +123,19 @@ our_bot/local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      robot_radius: 0.22
+      footprint: '[ [0.15, 0.12], [0.15, -0.12], [-0.15, -0.12], [-0.15, 0.12] ]' # Matches global costmap footprint
+      track_unknown_space: true
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.70
+        inflation_radius: 0.55
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
         publish_voxel_map: True
         origin_z: 0.0
-        z_resolution: 0.05
+        z_resolution: 0.1
         z_voxels: 16
         max_obstacle_height: 2.0
         mark_threshold: 0
@@ -162,7 +147,7 @@ our_bot/local_costmap:
           marking: True
           data_type: "LaserScan"
           raytrace_max_range: 3.0
-          raytrace_min_range: 0.0
+          raytrace_min_range: 0.15      # Increased from 0.0 to prevent chassis self-clearing
           obstacle_max_range: 2.5
-          obstacle_min_range: 0.0
+          obstacle_min_range: 0.15      # Increased from 0.0 to prevent chassis self-marking
       always_send_full_costmap: True

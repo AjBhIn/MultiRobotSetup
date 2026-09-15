@@ -8,8 +8,10 @@ Panels:
         - /Status1
         - /Map1
         - /Map1/Update Topic1
-        - /LaserScan1
         - /GlobalMap1/Update Topic1
+        - /LocalMap1
+        - /LocalMap1/Topic1
+        - /LocalMap1/Update Topic1
       Splitter Ratio: 0.5
     Tree Height: 707
   - Class: rviz_common/Selection
@@ -62,7 +64,7 @@ Visualization Manager:
       Name: Map
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
@@ -215,7 +217,7 @@ Visualization Manager:
       Name: GlobalMap
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
@@ -238,14 +240,14 @@ Visualization Manager:
       Name: LocalMap
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /our_bot/local_costmap/costmap
       Update Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /our_bot/local_costmap/costmap_updates

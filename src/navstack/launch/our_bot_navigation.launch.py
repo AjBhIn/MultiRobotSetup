@@ -8,6 +8,8 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     pkg_share = get_package_share_directory('navstack')
@@ -20,8 +22,32 @@ def generate_launch_description():
     map_file = os.path.join(pkg_share, 'maps', 'my_nav_map.yaml')
     behavior_xml = os.path.join(pkg_share, 'config', 'our_bot_behavior.xml')
 
-    namespace = 'our_bot'
 
+    # RVIZ IMPORT
+    # 1. Define the launch configuration
+    rviz_config_file = LaunchConfiguration('rviz_config')
+
+    # 2. Expand the tilde (~) to your actual home directory path
+    default_rviz_path = os.path.expanduser('~/namespacedrobot_ws/rvizfiles/namespacedrobots.rviz')
+
+    # 3. Declare the argument
+    declare_rviz_config_cmd = DeclareLaunchArgument(
+        'rviz_config',
+        default_value=default_rviz_path, 
+        description='Full path to the RViz config file to use'
+    )
+
+    # 4. ASSIGN THE NODE TO A VARIABLE
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config_file],
+        parameters=[{'use_sim_time': True}],
+        output='screen'
+    )
+
+    namespace = 'our_bot'
 
     return LaunchDescription([
         # ----------------------------------------------------------------------
@@ -110,5 +136,8 @@ def generate_launch_description():
                     'our_bot/bt_navigator'
                 ]
             }]
-        )
+        ),
+
+        declare_rviz_config_cmd,
+        rviz_node
     ])
