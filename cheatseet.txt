@@ -1,0 +1,18 @@
+### Wsl (for windows) Installation and Ros Installation and Setup
+    Docker Installation
+    0. Install WSL: wsl --install -d Ubuntu-24.04
+        This will step up linux and package sytem
+        1. sudo apt update && sudo apt install -y locales
+        2. sudo locale-gen en_US en_US.UTF-8
+        3. sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+        4. export LANG=en_US.UTF-8
+        5. sudo apt install -y software-properties-common curl
+        6. sudo add-apt-repository universe -y
+        7. sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+        8. echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+        9. sudo apt update
+        10. sudo apt upgrade -y
+    Installing Ros Now
+    1. sudo apt install -y ros-jazzy-desktop python3-colcon-common-extensions python3-rosdep ros-dev-tools
+        1. echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+        2.  source ~/.bashrc
